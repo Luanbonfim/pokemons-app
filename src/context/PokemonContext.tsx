@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { Pokemon } from '../types/Pokemon';
-import { PokemonError } from '../types/PokemonError';
+
 import { getPokemonList, getPokemonDetails } from '../services/pokemonService';
+import { Pokemon } from '../types/Pokemon';
+import { PokemonError } from '../types/Interfaces/PokemonError';
 
 interface PokemonContextType {
   pokemons: Pokemon[];

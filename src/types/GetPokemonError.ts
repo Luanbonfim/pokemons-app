@@ -1,8 +1,4 @@
-export interface PokemonError {
-  message: string;
-  code?: string;
-  status?: number;
-}
+import { PokemonError } from "./Interfaces/PokemonError";
 
 export const getPokemonError = (message: string, code?: string, status?: number): PokemonError => {
   return {

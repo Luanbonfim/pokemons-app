@@ -36,7 +36,7 @@ const PokemonDetails: React.FC = () => {
         <div className="pokemon-stats">
           <h3>Stats</h3>
           <div className="stats-grid">
-            {selectedPokemon.stats?.map(stat => (
+            {selectedPokemon.stats?.map((stat: any) => (
               <div key={stat.stat.name} className="stat-item">
                 <span className="stat-name">{stat.stat.name}</span>
                 <span className="stat-value">{stat.base_stat}</span>

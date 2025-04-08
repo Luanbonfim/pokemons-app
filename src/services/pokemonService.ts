@@ -1,6 +1,7 @@
-import { Pokemon, PokemonListResponse } from '../types/Pokemon';
+
 import { API_CONFIG } from '../config/api';
-import { getPokemonError } from '../types/PokemonError';
+import { Pokemon, PokemonListResponse } from '../types/Pokemon';
+import { getPokemonError } from '../types/GetPokemonError';
 
 export const getPokemonList = async (offset: number = 0, limit: number = 20): Promise<PokemonListResponse> => {
     try {

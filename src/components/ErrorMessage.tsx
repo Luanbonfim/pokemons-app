@@ -1,6 +1,6 @@
 import React from 'react';
-import { PokemonError } from '../types/PokemonError';
 import './ErrorMessage.css';
+import { PokemonError } from '../types/Interfaces/PokemonError';
 
 interface ErrorMessageProps {
   error: PokemonError;

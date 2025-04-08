@@ -1,6 +1,6 @@
 import React from 'react';
-import { Pokemon } from '../types/Pokemon';
 import './PokemonCard.css';
+import { Pokemon } from '../types/Pokemon';
 
 interface PokemonCardProps {
   pokemon: Pokemon;
