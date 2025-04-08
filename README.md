@@ -2,7 +2,8 @@
 
 A React application that displays Pokémon data from the PokeAPI. This app allows users to browse a list of Pokémon and view detailed information about each one.
 
-![Pokemon App Screenshot](screenshot.png)
+![image](https://github.com/user-attachments/assets/20c21bd7-af95-4cbf-a283-a09d4723420a)
+![image](https://github.com/user-attachments/assets/cdd86678-0271-49a4-a413-2f5298f200a8)
 
 ## Features
 
