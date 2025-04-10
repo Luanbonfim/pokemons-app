@@ -1,44 +1,47 @@
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PokemonCard from '../components/PokemonCard';
-import { usePokemon } from '../context/PokemonContext';
 import ErrorMessage from '../components/ErrorMessage';
 import Loading from '../components/Loading';
 import './PokemonList.css';
 import { Pokemon } from '../types/Pokemon';
+import { fetchPokemons } from '../store/pokemonSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 const PokemonList: React.FC = () => {
-    const { pokemons, loading, error, loadMorePokemons, hasMore, isLoadingMore } = usePokemon();
+    const appDispatch = useAppDispatch();
+    const { pokemons, loading, error, hasMore, offset } = useAppSelector(state => state.pokemon);
     const navigate = useNavigate();
     const observer = useRef<IntersectionObserver | null>(null);
 
     useEffect(() => {
-        // Create the observer
+        appDispatch(fetchPokemons(0));
+    }, [appDispatch]);
+
+    useEffect(() => {
         observer.current = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting && hasMore && !loading) {
-                loadMorePokemons();
+                appDispatch(fetchPokemons(offset));
             }
         }, { threshold: 0.5 });
-
-        // Start observing the sentinel element
+        
         const sentinel = document.getElementById('sentinel');
         if (sentinel) {
             observer.current.observe(sentinel);
         }
 
-        // Cleanup function runs before the effect runs again or when component unmounts
         return () => {
             if (observer.current) {
                 observer.current.disconnect();
             }
         };
-    }, [hasMore, loading, loadMorePokemons]);
+    }, [hasMore, loading, offset, appDispatch]);
 
     const handlePokemonClick = (id: number) => {
         navigate(`/pokemon/${id}`);
     };
 
-    if (loading  && pokemons.length === 0) return <Loading />;
+    if (loading && pokemons.length === 0) return <Loading />;
     if (error) return <ErrorMessage error={error} />;
 
     return (
@@ -56,7 +59,7 @@ const PokemonList: React.FC = () => {
             {/* Sentinel element for infinite scrolling */}
             <div id="sentinel" className="sentinel"></div>
             
-            {(loading || isLoadingMore) && pokemons.length > 0 && (
+            {loading && pokemons.length > 0 && (
                 <div className="loading-more">
                     <Loading />
                 </div>

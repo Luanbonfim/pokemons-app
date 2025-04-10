@@ -1,13 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { PokemonProvider } from './context/PokemonContext';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 import Home from './pages/Home';
 import PokemonDetails from './pages/PokemonDetails';
 import './App.css';
 
 function App() {
   return (
-    <PokemonProvider>
+    <Provider store={store}>
       <Router>
         <div className="App">
           <header className="App-header">
@@ -21,7 +22,7 @@ function App() {
           </main>
         </div>
       </Router>
-    </PokemonProvider>
+    </Provider>
   );
 }
 
