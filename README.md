@@ -13,13 +13,14 @@ A React application that displays Pokémon data from the PokeAPI. This app allow
 - Loading states with animated spinners
 - Error handling with user-friendly messages
 - Clean and modern UI with Pokémon-themed styling
+- Infinite scrolling for the Pokémon list
 
 ## Technologies Used
 
 - React
 - TypeScript
 - React Router for navigation
-- Context API for state management
+- Redux Toolkit for state management
 - CSS for styling
 - PokeAPI for Pokémon data
 
@@ -35,14 +36,16 @@ pokemons-app/
 │   │   └── PokemonCard.tsx
 │   ├── config/
 │   │   └── api.ts
-│   ├── context/
-│   │   └── PokemonContext.tsx
 │   ├── pages/
 │   │   ├── Home.tsx
 │   │   ├── PokemonDetails.tsx
 │   │   └── PokemonList.tsx
 │   ├── services/
 │   │   └── pokemonService.ts
+│   ├── store/
+│   │   ├── hooks.ts
+│   │   ├── pokemonSlice.ts
+│   │   └── store.ts
 │   ├── types/
 │   │   ├── Error.ts
 │   │   └── Pokemon.ts
@@ -95,6 +98,7 @@ pokemons-app/
 - The home page displays a grid of Pokémon cards
 - Click on a Pokémon card to view its detailed information
 - Use the "Back to List" button to return to the home page
+- Scroll down to load more Pokémon (infinite scrolling)
 
 ## API
 
@@ -102,13 +106,19 @@ This application uses the [PokeAPI](https://pokeapi.co/) to fetch Pokémon data.
 
 ## State Management
 
-The application uses React's Context API for state management. The `PokemonContext` provides the following:
+The application uses Redux Toolkit for state management. The Redux store provides the following:
 
-- List of Pokémon
+- List of Pokémon with pagination support
 - Selected Pokémon details
 - Loading states
 - Error handling
-- Functions to fetch Pokémon data
+- Async thunks for fetching Pokémon data
+
+### Redux Structure
+
+- **store.ts**: Configures the Redux store with middleware
+- **pokemonSlice.ts**: Contains the reducer, actions, and async thunks for Pokémon data
+- **hooks.ts**: Provides typed hooks for accessing the Redux store
 
 ## Components
 
@@ -137,11 +147,11 @@ The application uses CSS for styling with:
 
 ## Future Improvements
 
-- Add pagination or infinite scrolling for the Pokémon list
 - Implement search functionality
 - Add filtering by Pokémon type
 - Include more detailed Pokémon information
 - Add a favorites feature
+- Implement caching for better performance
 
 ## License
 
@@ -151,6 +161,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - [PokeAPI](https://pokeapi.co/) for providing the Pokémon data
 - [Pokémon](https://www.pokemon.com/) for the inspiration
+- [Redux Toolkit](https://redux-toolkit.js.org/) for simplifying Redux implementation
 
 ## Repository
 
