@@ -1,21 +1,23 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import PokemonCard from '../components/PokemonCard';
-import { usePokemon } from '../context/PokemonContext';
 import ErrorMessage from '../components/ErrorMessage';
 import Loading from '../components/Loading';
 import './PokemonDetails.css';
+import { fetchPokemonDetails } from '../store/pokemonSlice';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 
 const PokemonDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { selectedPokemon, loading, error, fetchPokemonDetails } = usePokemon();
+  const appDispatch = useAppDispatch();
+  const { selectedPokemon, loading, error } = useAppSelector(state => state.pokemon);
 
   useEffect(() => {
     if (id) {
-      fetchPokemonDetails(id);
+      appDispatch(fetchPokemonDetails(id));
     }
-  }, [id]);
+  }, [id, appDispatch]);
 
   if (loading) return <Loading />;
   if (error) return <ErrorMessage error={error} />;
